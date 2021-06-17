@@ -15,7 +15,7 @@
     {
       "Name": "CoreExtensions",
       "Type": "Runtime",
-      "LoadingPhase": "Default"
+      "LoadingPhase": "PreDefault"
     }
   ],
   "Plugins": []
