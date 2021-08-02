@@ -25,4 +25,7 @@ public:
     static void OpenMap( const UObject * world_context, const TSoftObjectPtr< UWorld > & map_soft_object_ptr, bool open_if_current = false );
 
     static bool BrowseMap( FWorldContext & world_context, const TSoftObjectPtr< UWorld > & map_soft_object_ptr, bool open_if_current = false );
+
+    template < class T >
+    static void GetAllActorsOfClass( const UObject * world_context_object, TSubclassOf< AActor > actor_class, TArray< T * > & out_actors );
 };
