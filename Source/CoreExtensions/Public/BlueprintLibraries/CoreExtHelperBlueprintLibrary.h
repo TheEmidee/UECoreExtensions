@@ -3,6 +3,9 @@
 #include <CoreMinimal.h>
 #include <Kismet/BlueprintFunctionLibrary.h>
 // ReSharper disable once CppUnusedIncludeDirective
+#include "Engine/Engine.h"
+
+#include <EngineUtils.h>
 #include <Templates/SubclassOf.h>
 #include <UObject/SoftObjectPtr.h>
 
@@ -27,5 +30,20 @@ public:
     static bool BrowseMap( FWorldContext & world_context, const TSoftObjectPtr< UWorld > & map_soft_object_ptr, bool open_if_current = false );
 
     template < class T >
-    static void GetAllActorsOfClass( const UObject * world_context_object, TSubclassOf< AActor > actor_class, TArray< T * > & out_actors );
+    static FORCEINLINE void GetAllActorsOfClass( const UObject * world_context_object, TSubclassOf< T > actor_class, TArray< T * > & out_actors )
+    {
+        out_actors.Reset();
+
+        if ( actor_class )
+        {
+            if ( auto * world = GEngine->GetWorldFromContextObject( world_context_object, EGetWorldErrorMode::LogAndReturnNull ) )
+            {
+                for ( TActorIterator< T > it( world, actor_class ); it; ++it )
+                {
+                    auto * actor = *it;
+                    out_actors.Add( actor );
+                }
+            }
+        }
+    }
 };

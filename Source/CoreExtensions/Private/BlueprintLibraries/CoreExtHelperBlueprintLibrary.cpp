@@ -2,7 +2,7 @@
 
 #include <Engine/Engine.h>
 #include <Engine/World.h>
-#include <EngineUtils.h>
+
 #include <Kismet/GameplayStatics.h>
 
 void UCoreExtHelperBlueprintLibrary::CreateObject( const TSubclassOf< UObject > class_of, UObject *& object )
@@ -46,22 +46,4 @@ bool UCoreExtHelperBlueprintLibrary::BrowseMap( FWorldContext & world_context, c
     }
 
     return true;
-}
-
-template < class T >
-void UCoreExtHelperBlueprintLibrary::GetAllActorsOfClass( const UObject * world_context_object, TSubclassOf< AActor > actor_class, TArray< T * > & out_actors )
-{
-    out_actors.Reset();
-
-    if ( actor_class )
-    {
-        if ( auto * world = GEngine->GetWorldFromContextObject( world_context_object, EGetWorldErrorMode::LogAndReturnNull ) )
-        {
-            for ( TActorIterator< T > it( world, actor_class ); it; ++it )
-            {
-                auto * actor = *it;
-                out_actors.Add( actor );
-            }
-        }
-    }
 }
