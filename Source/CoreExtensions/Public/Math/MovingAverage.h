@@ -1,5 +1,7 @@
 #pragma once
 
+#include <CoreMinimal.h>
+
 struct COREEXTENSIONS_API FMovingAverage
 {
     FMovingAverage();
