@@ -1,7 +1,7 @@
 #include "BlueprintLibraries/CoreExtHelperBlueprintLibrary.h"
 
-#include <Engine/Engine.h>
 #include <Engine/World.h>
+
 #include <Kismet/GameplayStatics.h>
 
 void UCoreExtHelperBlueprintLibrary::CreateObject( const TSubclassOf< UObject > class_of, UObject *& object )
