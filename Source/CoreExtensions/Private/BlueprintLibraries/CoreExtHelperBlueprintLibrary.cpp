@@ -1,6 +1,5 @@
 #include "BlueprintLibraries/CoreExtHelperBlueprintLibrary.h"
 
-#include <Engine/Engine.h>
 #include <Engine/World.h>
 
 #include <Kismet/GameplayStatics.h>
