@@ -12,6 +12,16 @@ struct FWorldContext;
 class UWorld;
 class UObject;
 
+UENUM( BlueprintType )
+enum class ECoreExtHitLocation : uint8
+{
+    None,
+    Top,
+    Bottom,
+    Right,
+    Left
+};
+
 UCLASS()
 class COREEXTENSIONS_API UCoreExtHelperBlueprintLibrary final : public UBlueprintFunctionLibrary
 {
@@ -23,6 +33,9 @@ public:
 
     UFUNCTION( BlueprintCallable, Category = "Maps" )
     static void OpenMap( const UObject * world_context, const TSoftObjectPtr< UWorld > & map_soft_object_ptr, bool open_if_current = false );
+
+    UFUNCTION( BlueprintPure, Category = "Actors" )
+    static ECoreExtHitLocation GetHitLocationOnActor( const FVector impact_point, AActor * actor );
 
     static bool BrowseMap( FWorldContext & world_context, const TSoftObjectPtr< UWorld > & map_soft_object_ptr, bool open_if_current = false );
 
