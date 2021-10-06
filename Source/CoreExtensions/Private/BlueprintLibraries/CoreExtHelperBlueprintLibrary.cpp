@@ -1,9 +1,8 @@
 #include "BlueprintLibraries/CoreExtHelperBlueprintLibrary.h"
 
-#include "Kismet/KismetMathLibrary.h"
-
 #include <Engine/World.h>
 #include <Kismet/GameplayStatics.h>
+#include <Kismet/KismetMathLibrary.h>
 
 void UCoreExtHelperBlueprintLibrary::CreateObject( const TSubclassOf< UObject > class_of, UObject *& object )
 {
@@ -21,7 +20,7 @@ void UCoreExtHelperBlueprintLibrary::OpenMap( const UObject * world_context, con
     UGameplayStatics::OpenLevel( world_context, FName( *map_soft_object_ptr.GetAssetName() ), true );
 }
 
-ECoreExtHitLocation UCoreExtHelperBlueprintLibrary::GetHitLocationOnActor( const FVector impact_point, AActor * actor )
+ECoreExtHitLocation UCoreExtHelperBlueprintLibrary::GetHitLocationOnActor( const FVector & impact_point, AActor * actor )
 {
     if ( actor == nullptr )
     {
