@@ -5,7 +5,7 @@ FMovingAverage::FMovingAverage() :
 {
 }
 
-FMovingAverage::FMovingAverage( const int required_sample_count, const float sample_rate_seconds ):
+FMovingAverage::FMovingAverage( const int required_sample_count, const float sample_rate_seconds ) :
     SampleCount( 0 ),
     SampleAccumulator( 0 ),
     SampleStartTime( 0 ),

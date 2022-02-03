@@ -11,6 +11,7 @@ struct COREEXTENSIONS_API FMovingAverage
     void Reset();
     void Reset( int required_sample_count, float sample_rate_seconds );
     float GetAverage() const;
+    void SetAverage( float average );
     int GetSampleCount() const;
     void AddSample( double current_time, float value );
 
@@ -43,6 +44,11 @@ FORCEINLINE void FMovingAverage::Reset()
 FORCEINLINE float FMovingAverage::GetAverage() const
 {
     return SampleAverage;
+}
+
+FORCEINLINE void FMovingAverage::SetAverage( float average )
+{
+    SampleAverage = average;
 }
 
 FORCEINLINE int FMovingAverage::GetSampleCount() const
