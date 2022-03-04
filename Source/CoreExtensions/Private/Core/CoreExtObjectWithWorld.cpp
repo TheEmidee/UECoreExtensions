@@ -1,6 +1,6 @@
-#include "BlueprintLibraries/CoreExtObject.h"
+#include "Core/CoreExtObjectWithWorld.h"
 
-UWorld * UCoreExtObject::GetWorld() const
+UWorld * UCoreExtObjectWithWorld::GetWorld() const
 {
     if ( IsTemplate() )
     {

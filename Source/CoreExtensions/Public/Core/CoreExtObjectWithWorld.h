@@ -2,10 +2,10 @@
 
 #include <CoreMinimal.h>
 
-#include "CoreExtObject.generated.h"
+#include "CoreExtObjectWithWorld.generated.h"
 
 UCLASS( Abstract, BlueprintType, Blueprintable )
-class COREEXTENSIONS_API UCoreExtObject : public UObject
+class COREEXTENSIONS_API UCoreExtObjectWithWorld : public UObject
 {
     GENERATED_BODY()
 
