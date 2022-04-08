@@ -72,3 +72,8 @@ bool UCoreExtHelperBlueprintLibrary::BrowseMap( FWorldContext & world_context, c
 
     return true;
 }
+
+UObject * UCoreExtHelperBlueprintLibrary::GetClassDefaultObject( const UClass * object_class )
+{
+    return object_class->GetDefaultObject();
+}

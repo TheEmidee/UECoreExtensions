@@ -44,6 +44,9 @@ public:
 
     template < typename _ACTOR_CLASS_ >
     static void GetAllActorsOfClass( const UObject * world_context, TArray< _ACTOR_CLASS_ * > & out_actors );
+
+    UFUNCTION( BlueprintPure, Category = "Utilities", meta = ( DeterminesOutputType = "object_class" ) )
+    static UObject * GetClassDefaultObject( const UClass * object_class );
 };
 
 template < typename _ACTOR_CLASS_ >
