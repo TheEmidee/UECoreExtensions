@@ -1,8 +1,8 @@
 #include "BlueprintLibraries/CoreExtHelperBlueprintLibrary.h"
 
 #include <Engine/World.h>
-
 #include <Kismet/GameplayStatics.h>
+#include <Kismet/KismetMathLibrary.h>
 
 void UCoreExtHelperBlueprintLibrary::CreateObject( const TSubclassOf< UObject > class_of, UObject *& object )
 {
@@ -18,6 +18,32 @@ void UCoreExtHelperBlueprintLibrary::OpenMap( const UObject * world_context, con
     }
 
     UGameplayStatics::OpenLevel( world_context, FName( *map_soft_object_ptr.GetAssetName() ), true );
+}
+
+ECoreExtHitLocation UCoreExtHelperBlueprintLibrary::GetHitLocationOnActor( const FVector & impact_point, AActor * actor )
+{
+    if ( actor == nullptr )
+    {
+        return ECoreExtHitLocation::None;
+    }
+
+    const auto actor_location = actor->GetActorLocation();
+    const auto actor_forward = actor->GetActorForwardVector();
+
+    auto actor_to_impact = impact_point - actor_location;
+    actor_to_impact.Normalize();
+
+    auto impact_direction = actor_to_impact - actor_forward;
+    impact_direction = UKismetMathLibrary::ProjectVectorOnToPlane( impact_direction, actor_forward );
+
+    impact_direction = UKismetMathLibrary::InverseTransformDirection( actor->GetActorTransform(), impact_direction );
+
+    if ( FMath::Abs( impact_direction.Y ) > FMath::Abs( impact_direction.Z ) )
+    {
+        return impact_direction.Y > 0.0f ? ECoreExtHitLocation::Right : ECoreExtHitLocation::Left;
+    }
+
+    return impact_direction.Z > 0.0f ? ECoreExtHitLocation::Top : ECoreExtHitLocation::Bottom;
 }
 
 bool UCoreExtHelperBlueprintLibrary::BrowseMap( FWorldContext & world_context, const TSoftObjectPtr< UWorld > & map_soft_object_ptr, const bool open_if_current /* = false */ )
@@ -45,4 +71,9 @@ bool UCoreExtHelperBlueprintLibrary::BrowseMap( FWorldContext & world_context, c
     }
 
     return true;
+}
+
+UObject * UCoreExtHelperBlueprintLibrary::GetClassDefaultObject( const UClass * object_class )
+{
+    return object_class->GetDefaultObject();
 }
