@@ -59,6 +59,9 @@ namespace Private
     }
 }
 
+#if NO_LOGGING
+    #define UE_SLOG( CategoryName, Verbosity, Format, ... )
+#else
 #define UE_SLOG( CategoryName, Verbosity, Format, ... )                                                                                                                                                                                                \
     UE_LOG( CategoryName, Verbosity, Format, ##__VA_ARGS__ );                                                                                                                                                                                          \
     {                                                                                                                                                                                                                                                  \
@@ -76,3 +79,5 @@ namespace Private
             }                                                                                                                                                                                                                                          \
         }                                                                                                                                                                                                                                              \
     }
+
+#endif
