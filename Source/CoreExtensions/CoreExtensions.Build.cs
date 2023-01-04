@@ -15,7 +15,8 @@ namespace UnrealBuildTool.Rules
                 new string[] { 
                     "Core",
                     "CoreUObject",
-                    "Engine"
+                    "Engine",
+                    "GameplayTags"
                 }
             );
         }
