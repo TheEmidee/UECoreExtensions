@@ -2,7 +2,6 @@
   "FileVersion": 3,
   "Version": 1.0,
   "VersionName": "1.0",
-  "EngineVersion": "5.0.0",
   "FriendlyName": "Core Extensions",
   "Description": "A collection of classes to extand the existing core module of the engine",
   "Category": "Core",
