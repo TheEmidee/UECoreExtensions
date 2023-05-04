@@ -1,8 +1,10 @@
 #include "BlueprintLibraries/CoreExtHelperBlueprintLibrary.h"
 
 #include <Engine/World.h>
+#include <GameFramework/GameModeBase.h>
+#include <GameFramework/PlayerController.h>
 #include <Kismet/GameplayStatics.h>
-#include <Kismet/KismetMathLibrary.h>
+#include <UnrealEngine.h>
 
 void UCoreExtHelperBlueprintLibrary::CreateObject( const TSubclassOf< UObject > class_of, UObject *& object )
 {
@@ -50,4 +52,21 @@ bool UCoreExtHelperBlueprintLibrary::BrowseMap( FWorldContext & world_context, c
 UObject * UCoreExtHelperBlueprintLibrary::GetClassDefaultObject( const UClass * object_class )
 {
     return object_class->GetDefaultObject();
+}
+
+void UCoreExtHelperBlueprintLibrary::RestartAllPlayers( const UObject * world_context_object )
+{
+    if ( auto * world = GEngine->GetWorldFromContextObject( world_context_object, EGetWorldErrorMode::LogAndReturnNull ) )
+    {
+        if ( auto * gm = world->GetAuthGameMode() )
+        {
+            for ( TPlayerControllerIterator< APlayerController >::ServerAll iterator( world ); iterator; ++iterator )
+            {
+                if ( auto * player_controller = *iterator )
+                {
+                    gm->RestartPlayer( player_controller );
+                }
+            }
+        }
+    }
 }

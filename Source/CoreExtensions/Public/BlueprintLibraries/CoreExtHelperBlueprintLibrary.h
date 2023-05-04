@@ -34,6 +34,9 @@ public:
 
     UFUNCTION( BlueprintPure, Category = "Utilities", meta = ( DeterminesOutputType = "object_class" ) )
     static UObject * GetClassDefaultObject( const UClass * object_class );
+
+    UFUNCTION( BlueprintCallable, Category = "GameMode", meta = ( WorldContext = "world_context_object" ) )
+    static void RestartAllPlayers( const UObject * world_context_object );
 };
 
 template < typename _ACTOR_CLASS_ >
