@@ -1,5 +1,6 @@
 #include "BlueprintLibraries/CoreExtPlayerBlueprintLibrary.h"
 
+#include <GameFramework/Pawn.h>
 #include <GameFramework/PlayerController.h>
 #include <GameFramework/PlayerState.h>
 
