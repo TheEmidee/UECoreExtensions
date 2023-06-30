@@ -71,3 +71,44 @@ void UCoreExtHelperBlueprintLibrary::RestartAllPlayers( const UObject * world_co
         }
     }
 }
+
+void UCoreExtHelperBlueprintLibrary::ParseOptionsFromString( TMap< FString, FString > & options_map, FString options )
+{
+    FString pair, pair_key, pair_value;
+
+    // Start from the first ?
+    int char_position;
+    if ( options.FindChar( '?', char_position ) )
+    {
+        options.MidInline( char_position );
+    }
+
+    // Remove everything after an ' '
+    if ( options.FindChar( ' ', char_position ) )
+    {
+        options.MidInline( 0, char_position );
+    }
+
+    // Do the parsing
+    while ( UGameplayStatics::GrabOption( options, pair ) )
+    {
+        UGameplayStatics::GetKeyValue( pair, pair_key, pair_value );
+
+        options_map.Emplace( pair_key, pair_value );
+    }
+}
+
+FString UCoreExtHelperBlueprintLibrary::GetGameModeOptions( const UObject * world_context_object )
+{
+    FString result;
+
+    if ( const auto * world = world_context_object->GetWorld() )
+    {
+        if ( const auto * gm = world->GetAuthGameMode() )
+        {
+            result = gm->OptionsString;
+        }
+    }
+
+    return result;
+}

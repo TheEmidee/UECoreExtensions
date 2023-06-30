@@ -37,6 +37,12 @@ public:
 
     UFUNCTION( BlueprintCallable, Category = "GameMode", meta = ( WorldContext = "world_context_object" ) )
     static void RestartAllPlayers( const UObject * world_context_object );
+
+    UFUNCTION( BlueprintPure )
+    static void ParseOptionsFromString( TMap< FString, FString > & options_map, FString options );
+
+    UFUNCTION( BlueprintPure, meta = ( WorldContext = "world_context_object" ) )
+    static FString GetGameModeOptions( const UObject * world_context_object );
 };
 
 template < typename _ACTOR_CLASS_ >
