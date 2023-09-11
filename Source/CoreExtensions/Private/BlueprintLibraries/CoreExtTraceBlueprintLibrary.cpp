@@ -1,7 +1,6 @@
 #include "BlueprintLibraries/CoreExtTraceBlueprintLibrary.h"
 
 #include <DrawDebugHelpers.h>
-#include <Engine/Private/KismetTraceUtils.h>
 
 static const float kismet_trace_debug_impact_point_size = 16.f;
 
