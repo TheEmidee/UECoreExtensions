@@ -28,7 +28,7 @@ struct COREEXTENSIONS_API FEdge2D
 
     FVector2D From;
     FVector2D To;
-    
+
     static const FEdge2D ZeroEdge2D;
 };
 

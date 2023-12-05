@@ -12,7 +12,6 @@ class COREEXTENSIONS_API UCoreExtGameplayTagBlueprintLibrary final : public UBlu
     GENERATED_BODY()
 
 public:
-
     /*
     Returns a tag without a given number of parents.
     For example, RemoveGameplayTagParents( "w.x.y.z", 2 ) will return "y.z"

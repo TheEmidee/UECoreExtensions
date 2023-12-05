@@ -15,7 +15,6 @@ public:
     const TArray< FTriangle2D > & GetTriangles() const;
 
 private:
-
     TArray< FVector2D > Vertices;
     TArray< FEdge2D > Edges;
     TArray< FTriangle2D > Triangles;

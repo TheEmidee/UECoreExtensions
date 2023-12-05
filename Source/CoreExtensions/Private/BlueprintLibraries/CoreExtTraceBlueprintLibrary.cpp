@@ -22,16 +22,16 @@ void UCoreExtTraceBlueprintLibrary::DrawDebugSweptBox( const UWorld * world, FVe
     auto const capsule_rot = orientation.Quaternion();
     DrawDebugBox( world, start, half_size, capsule_rot, color, use_persistent_lines, life_time, depth_priority );
 
-    //now draw lines from vertices
+    // now draw lines from vertices
     FVector vertices[ 8 ];
-    vertices[ 0 ] = start + capsule_rot.RotateVector( FVector( -half_size.X, -half_size.Y, -half_size.Z ) ); //flt
-    vertices[ 1 ] = start + capsule_rot.RotateVector( FVector( -half_size.X, half_size.Y, -half_size.Z ) );  //frt
-    vertices[ 2 ] = start + capsule_rot.RotateVector( FVector( -half_size.X, -half_size.Y, half_size.Z ) );  //flb
-    vertices[ 3 ] = start + capsule_rot.RotateVector( FVector( -half_size.X, half_size.Y, half_size.Z ) );   //frb
-    vertices[ 4 ] = start + capsule_rot.RotateVector( FVector( half_size.X, -half_size.Y, -half_size.Z ) );  //blt
-    vertices[ 5 ] = start + capsule_rot.RotateVector( FVector( half_size.X, half_size.Y, -half_size.Z ) );   //brt
-    vertices[ 6 ] = start + capsule_rot.RotateVector( FVector( half_size.X, -half_size.Y, half_size.Z ) );   //blb
-    vertices[ 7 ] = start + capsule_rot.RotateVector( FVector( half_size.X, half_size.Y, half_size.Z ) );    //brb
+    vertices[ 0 ] = start + capsule_rot.RotateVector( FVector( -half_size.X, -half_size.Y, -half_size.Z ) ); // flt
+    vertices[ 1 ] = start + capsule_rot.RotateVector( FVector( -half_size.X, half_size.Y, -half_size.Z ) );  // frt
+    vertices[ 2 ] = start + capsule_rot.RotateVector( FVector( -half_size.X, -half_size.Y, half_size.Z ) );  // flb
+    vertices[ 3 ] = start + capsule_rot.RotateVector( FVector( -half_size.X, half_size.Y, half_size.Z ) );   // frb
+    vertices[ 4 ] = start + capsule_rot.RotateVector( FVector( half_size.X, -half_size.Y, -half_size.Z ) );  // blt
+    vertices[ 5 ] = start + capsule_rot.RotateVector( FVector( half_size.X, half_size.Y, -half_size.Z ) );   // brt
+    vertices[ 6 ] = start + capsule_rot.RotateVector( FVector( half_size.X, -half_size.Y, half_size.Z ) );   // blb
+    vertices[ 7 ] = start + capsule_rot.RotateVector( FVector( half_size.X, half_size.Y, half_size.Z ) );    // brb
     for ( auto vertex_idx = 0; vertex_idx < 8; ++vertex_idx )
     {
         DrawDebugLine( world, vertices[ vertex_idx ], vertices[ vertex_idx ] + trace_vec, color, use_persistent_lines, life_time, depth_priority );

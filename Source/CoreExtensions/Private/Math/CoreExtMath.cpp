@@ -22,7 +22,7 @@ TArray< FEdge2D, TFixedAllocator< 4 > > FCoreExtMath::GetBoxEdges2D( const FBox 
 
 TArray< FEdge, TFixedAllocator< 4 > > FCoreExtMath::GetOrderedBoxEdges( const FBox & box )
 {
-     return {
+    return {
         FEdge( box.Min, FVector( box.Min.X, box.Max.Y, box.Min.Z ) ),
         FEdge( FVector( box.Max.X, box.Min.Y, box.Min.Z ), box.Min ),
         FEdge( FVector( box.Max.X, box.Max.Y, box.Min.Z ), FVector( box.Max.X, box.Min.Y, box.Min.Z ) ),
