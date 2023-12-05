@@ -112,7 +112,7 @@ void FDelaunayTriangulation::Triangulate( const TArray< FVector2D > & vertices )
         }
     }
 
-    Triangles.RemoveAll( [p1, p2, p3]( FTriangle2D & t ) {
+    Triangles.RemoveAll( [ p1, p2, p3 ]( FTriangle2D & t ) {
         return t.ContainsVertex( p1 ) || t.ContainsVertex( p2 ) || t.ContainsVertex( p3 );
     } );
 

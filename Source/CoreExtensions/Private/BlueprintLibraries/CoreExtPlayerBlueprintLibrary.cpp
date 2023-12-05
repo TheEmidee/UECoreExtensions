@@ -1,5 +1,6 @@
 #include "BlueprintLibraries/CoreExtPlayerBlueprintLibrary.h"
 
+#include <Engine/Player.h>
 #include <GameFramework/Pawn.h>
 #include <GameFramework/PlayerController.h>
 #include <GameFramework/PlayerState.h>
@@ -41,6 +42,11 @@ APlayerController * UCoreExtPlayerBlueprintLibrary::GetPlayerControllerFromObjec
     if ( const auto * pawn = Cast< APawn >( object ) )
     {
         return Cast< APlayerController >( pawn->GetController() );
+    }
+
+    if ( const auto * player = Cast< UPlayer >( object ) )
+    {
+        return player->PlayerController;
     }
 
     return nullptr;
