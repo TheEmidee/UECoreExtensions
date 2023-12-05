@@ -72,6 +72,34 @@ void UCoreExtHelperBlueprintLibrary::RestartAllPlayers( const UObject * world_co
     }
 }
 
+void UCoreExtHelperBlueprintLibrary::RestartPlayerAtPlayerStart( APlayerController * pc, bool teleport_player /*= true*/ )
+{
+    if ( pc == nullptr )
+    {
+        return;
+    }
+    if ( pc->StartSpot == nullptr )
+    {
+        return;
+    }
+
+    if ( const auto * world = GEngine->GetWorldFromContextObject( pc, EGetWorldErrorMode::LogAndReturnNull ) )
+    {
+        if ( auto * gm = world->GetAuthGameMode() )
+        {
+            gm->RestartPlayerAtPlayerStart( pc, pc->StartSpot.Get() );
+
+            if ( teleport_player )
+            {
+                if ( auto * pawn = pc->GetPawn() )
+                {
+                    pawn->SetActorLocation( pc->StartSpot->GetActorLocation() );
+                }
+            }
+        }
+    }
+}
+
 void UCoreExtHelperBlueprintLibrary::ParseOptionsFromString( TMap< FString, FString > & options_map, FString options )
 {
     FString pair, pair_key, pair_value;
