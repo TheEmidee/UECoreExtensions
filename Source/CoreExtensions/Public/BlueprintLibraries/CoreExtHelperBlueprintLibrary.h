@@ -38,6 +38,9 @@ public:
     UFUNCTION( BlueprintCallable, Category = "GameMode", meta = ( WorldContext = "world_context_object" ) )
     static void RestartAllPlayers( const UObject * world_context_object );
 
+    UFUNCTION( BlueprintPure, Category = "GameMode" )
+    static AActor * GetPlayerControllerStartSpot( APlayerController * pc );
+
     UFUNCTION( BlueprintPure )
     static void ParseOptionsFromString( TMap< FString, FString > & options_map, FString options );
 
