@@ -31,7 +31,7 @@ FEdge2D::FEdge2D( const FVector2D & from, const FVector2D & to ) :
 
 bool FEdge2D::operator==( const FEdge2D & other ) const
 {
-    return other.From.Equals( From ) && other.To.Equals( To ) || other.From.Equals( To ) && other.To.Equals( From );
+    return ( other.From.Equals( From ) && other.To.Equals( To ) ) || ( other.From.Equals( To ) && other.To.Equals( From ) );
 }
 
 bool FEdge2D::operator!=( const FEdge2D & other ) const
@@ -67,11 +67,11 @@ bool FEdge2D::IntersectsWith( const FEdge2D & segment ) const
 
     if ( intersects )
     {
-        if ( segment.From.Y == segment.To.Y && segment.From.Y == From.Y || segment.From.Y == To.Y )
+        if ( ( segment.From.Y == segment.To.Y && segment.From.Y == From.Y ) || segment.From.Y == To.Y )
         {
             intersects = false;
         }
-        else if ( segment.From.X == segment.To.X && segment.From.X == From.X || segment.From.X == To.X )
+        else if ( ( segment.From.X == segment.To.X && segment.From.X == From.X ) || segment.From.X == To.X )
         {
             intersects = false;
         }
