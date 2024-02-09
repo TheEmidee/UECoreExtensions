@@ -39,7 +39,7 @@ public:
     static void RestartAllPlayers( const UObject * world_context_object );
 
     UFUNCTION( BlueprintPure, Category = "GameMode" )
-    static AActor * GetPlayerControllerStartSpot( APlayerController * pc );
+    static AActor * GetControllerStartSpot( const AController * controller );
 
     UFUNCTION( BlueprintPure )
     static void ParseOptionsFromString( TMap< FString, FString > & options_map, FString options );

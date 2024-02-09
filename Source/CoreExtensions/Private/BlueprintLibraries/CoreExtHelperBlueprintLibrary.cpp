@@ -72,13 +72,14 @@ void UCoreExtHelperBlueprintLibrary::RestartAllPlayers( const UObject * world_co
     }
 }
 
-AActor * UCoreExtHelperBlueprintLibrary::GetPlayerControllerStartSpot( APlayerController * pc )
+AActor * UCoreExtHelperBlueprintLibrary::GetControllerStartSpot( const AController * controller )
 {
-    if ( pc == nullptr )
+    if ( controller == nullptr )
     {
         return nullptr;
     }
-    return pc->StartSpot.Get();
+
+    return controller->StartSpot.Get();
 }
 
 void UCoreExtHelperBlueprintLibrary::ParseOptionsFromString( TMap< FString, FString > & options_map, FString options )
