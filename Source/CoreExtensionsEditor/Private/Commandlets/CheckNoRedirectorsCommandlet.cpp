@@ -3,12 +3,12 @@
 #include <AssetRegistry/AssetRegistryModule.h>
 #include <AssetRegistry/IAssetRegistry.h>
 
-DEFINE_LOG_CATEGORY_STATIC( LogFindRedirectors, Log, All )
+DEFINE_LOG_CATEGORY_STATIC( LogCheckNoRedirectors, Log, All )
 
 int32 UCheckNoRedirectorsCommandlet::Main( const FString & params )
 {
-    UE_LOG( LogFindRedirectors, Display, TEXT( "--------------------------------------------------------------------------------------------" ) );
-    UE_LOG( LogFindRedirectors, Display, TEXT( "Running CheckNoRedirectors Commandlet" ) );
+    UE_LOG( LogCheckNoRedirectors, Display, TEXT( "--------------------------------------------------------------------------------------------" ) );
+    UE_LOG( LogCheckNoRedirectors, Display, TEXT( "Running CheckNoRedirectors Commandlet" ) );
 
     const auto & asset_registry_module = FModuleManager::LoadModuleChecked< FAssetRegistryModule >( TEXT( "AssetRegistry" ) );
     const IAssetRegistry & asset_registry = asset_registry_module.Get();
@@ -44,18 +44,18 @@ int32 UCheckNoRedirectorsCommandlet::Main( const FString & params )
 
             if ( !package_name.StartsWith( "/Game/Developers/" ) )
             {
-                UE_LOG( LogFindRedirectors, Error, TEXT( "Found redirector : %s" ), *package_name );
-                UE_LOG( LogFindRedirectors, Verbose, TEXT( "Referenced by:" ) );
+                UE_LOG( LogCheckNoRedirectors, Error, TEXT( "Found redirector : %s" ), *package_name );
+                UE_LOG( LogCheckNoRedirectors, Verbose, TEXT( "Referenced by:" ) );
 
                 for ( const auto referencer : referencer_packages )
                 {
-                    UE_LOG( LogFindRedirectors, Verbose, TEXT( " - %s" ), *referencer );
+                    UE_LOG( LogCheckNoRedirectors, Verbose, TEXT( " - %s" ), *referencer );
                 }
             }
         }
     }
 
-    UE_LOG( LogFindRedirectors, Display, TEXT( "Successfully finished running CheckNoRedirectors Commandlet" ) );
-    UE_LOG( LogFindRedirectors, Display, TEXT( "--------------------------------------------------------------------------------------------" ) );
+    UE_LOG( LogCheckNoRedirectors, Display, TEXT( "Successfully finished running CheckNoRedirectors Commandlet" ) );
+    UE_LOG( LogCheckNoRedirectors, Display, TEXT( "--------------------------------------------------------------------------------------------" ) );
     return 0;
 }
