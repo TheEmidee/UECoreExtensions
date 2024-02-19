@@ -15,6 +15,11 @@
       "Name": "CoreExtensions",
       "Type": "Runtime",
       "LoadingPhase": "PreLoadingScreen"
+    },
+    {
+      "Name": "CoreExtensionsEditor",
+      "Type": "Editor",
+      "LoadingPhase": "Default"
     }
   ],
   "Plugins": []
