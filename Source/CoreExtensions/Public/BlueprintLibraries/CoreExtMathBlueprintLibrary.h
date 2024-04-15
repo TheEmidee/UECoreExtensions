@@ -13,4 +13,7 @@ class COREEXTENSIONS_API UCoreExtMathBlueprintLibrary final : public UBlueprintF
 public:
     UFUNCTION( BlueprintPure )
     static int GetWrappedIndex( const int index, const int size );
+
+    UFUNCTION( BlueprintPure )
+    static bool SegmentIntersection2D( FVector & out_intersection_point, const FVector & segment_start_a, const FVector & segment_end_a, const FVector & segment_start_b, const FVector & segment_end_b );
 };
