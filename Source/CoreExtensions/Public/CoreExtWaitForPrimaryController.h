@@ -28,5 +28,7 @@ protected:
 private:
     void BroadCastPrimaryController( APlayerController * player_controller ) const;
 
+    TWeakObjectPtr< UWorld > WorldPtr;
+
     FDelegateHandle OnPrimaryControllerDelegateHandle;
 };

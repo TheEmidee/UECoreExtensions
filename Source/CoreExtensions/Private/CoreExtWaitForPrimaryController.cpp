@@ -6,11 +6,12 @@
 
 UCoreExtWaitForPrimaryController * UCoreExtWaitForPrimaryController::WaitForPrimaryController( UObject * world_context_object )
 {
-    UCoreExtWaitForPrimaryController * action = nullptr;
+    ThisClass * action = nullptr;
 
     if ( auto * world = GEngine->GetWorldFromContextObject( world_context_object, EGetWorldErrorMode::LogAndReturnNull ) )
     {
         action = NewObject< ThisClass >();
+        action->WorldPtr = world;
         action->RegisterWithGameInstance( world );
     }
     return action;
@@ -20,7 +21,7 @@ void UCoreExtWaitForPrimaryController::Activate()
 {
     Super::Activate();
 
-    if ( auto * game_instance = GetWorld()->GetGameInstance() )
+    if ( const auto * game_instance = WorldPtr.Get()->GetGameInstance() )
     {
         if ( auto * player_controller = game_instance->GetPrimaryPlayerController() )
         {
@@ -45,7 +46,7 @@ void UCoreExtWaitForPrimaryController::SetReadyToDestroy()
 
 void UCoreExtWaitForPrimaryController::OnGameModePostLogin( AGameModeBase * game_mode_base, APlayerController * player_controller ) const
 {
-    auto * game_instance = GetWorld()->GetGameInstance();
+    const auto * game_instance = WorldPtr->GetGameInstance();
 
     if ( player_controller != game_instance->GetPrimaryPlayerController() )
     {
