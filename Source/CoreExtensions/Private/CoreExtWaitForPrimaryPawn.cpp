@@ -1,20 +1,19 @@
 #include "CoreExtWaitForPrimaryPawn.h"
 
-#include "GameFramework/GameModeBase.h"
-
 #include <Engine/GameInstance.h>
+#include <GameFramework/GameModeBase.h>
 
 UCoreExtWaitForPrimaryPawn * UCoreExtWaitForPrimaryPawn::WaitForPrimaryPawn( UObject * world_context_object )
 {
-    ThisClass * action = nullptr;
-
     if ( auto * world = GEngine->GetWorldFromContextObject( world_context_object, EGetWorldErrorMode::LogAndReturnNull ) )
     {
-        action = NewObject< ThisClass >();
+        auto * action = NewObject< ThisClass >();
         action->WorldPtr = world;
         action->RegisterWithGameInstance( world );
+
+        return action;
     }
-    return action;
+    return nullptr;
 }
 
 void UCoreExtWaitForPrimaryPawn::Activate()
@@ -44,12 +43,9 @@ void UCoreExtWaitForPrimaryPawn::SetReadyToDestroy()
 
     FGameModeEvents::GameModePostLoginEvent.Remove( OnPrimaryControllerDelegateHandle );
 
-    if ( const auto * game_instance = WorldPtr.Get()->GetGameInstance() )
+    if ( PlayerController != nullptr )
     {
-        if ( auto * player_controller = game_instance->GetPrimaryPlayerController() )
-        {
-            player_controller->OnPossessedPawnChanged.RemoveDynamic( this, &ThisClass::Step3_ListenToPrimaryPawnChanged );
-        }
+        PlayerController->OnPossessedPawnChanged.RemoveDynamic( this, &ThisClass::Step3_ListenToPrimaryPawnChanged );
     }
 }
 
@@ -73,7 +69,8 @@ void UCoreExtWaitForPrimaryPawn::Step2_TryToGetPawn( APlayerController * player_
     }
     else
     {
-        player_controller->OnPossessedPawnChanged.AddDynamic( this, &ThisClass::Step3_ListenToPrimaryPawnChanged );
+        PlayerController = player_controller;
+        PlayerController->OnPossessedPawnChanged.AddDynamic( this, &ThisClass::Step3_ListenToPrimaryPawnChanged );
     }
 }
 

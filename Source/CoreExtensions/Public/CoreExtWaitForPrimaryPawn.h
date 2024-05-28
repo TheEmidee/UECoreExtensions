@@ -26,10 +26,12 @@ protected:
 private:
     void Step1_ListenToPrimaryControllerExist( AGameModeBase * game_mode_base, APlayerController * player_controller );
     void Step2_TryToGetPawn( APlayerController * player_controller );
+
     UFUNCTION()
     void Step3_ListenToPrimaryPawnChanged( APawn * old_pawn, APawn * new_pawn );
     void Step4_BroadCastPrimaryPawn( const APawn * player_pawn );
 
+    TObjectPtr< APlayerController > PlayerController;
     TWeakObjectPtr< UWorld > WorldPtr;
 
     FDelegateHandle OnPrimaryControllerDelegateHandle;
