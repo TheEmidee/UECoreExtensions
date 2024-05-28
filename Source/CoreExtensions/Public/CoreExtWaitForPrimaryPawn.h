@@ -5,10 +5,10 @@
 
 #include "CoreExtWaitForPrimaryPawn.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam( FOnPrimaryControllerReadyDelegate, const APawn *, primary_pawn );
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam( FOnPrimaryPawnReadyDelegate, const APawn *, primary_pawn );
 
 UCLASS()
-class COREEXTENSIONS_API UCoreExtWaitForPrimaryPawn : public UBlueprintAsyncActionBase
+class COREEXTENSIONS_API UCoreExtWaitForPrimaryPawn final : public UBlueprintAsyncActionBase
 {
     GENERATED_BODY()
 
@@ -21,7 +21,7 @@ public:
 
 protected:
     UPROPERTY( BlueprintAssignable )
-    FOnPrimaryControllerReadyDelegate OnPrimaryPawnDelegate;
+    FOnPrimaryPawnReadyDelegate OnPrimaryPawnDelegate;
 
 private:
     void Step1_ListenToPrimaryControllerExist( AGameModeBase * game_mode_base, APlayerController * player_controller );
@@ -33,6 +33,5 @@ private:
 
     TObjectPtr< APlayerController > PlayerController;
     TWeakObjectPtr< UWorld > WorldPtr;
-
     FDelegateHandle OnPrimaryControllerDelegateHandle;
 };
