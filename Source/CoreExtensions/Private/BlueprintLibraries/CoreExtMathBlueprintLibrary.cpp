@@ -1,8 +1,8 @@
 #include "BlueprintLibraries/CoreExtMathBlueprintLibrary.h"
 
-TArray< FVector2f > UCoreExtMathBlueprintLibrary::GetPointsOnRectangleEdge( const float height, const float width, const float point_spacing )
+TArray< FVector2D > UCoreExtMathBlueprintLibrary::GetPointsOnRectangleEdge( const float height, const float width, const float point_spacing )
 {
-    TArray< FVector2f > result;
+    TArray< FVector2D > result;
 
     float half_width = width / 2.0f;
     float half_height = height / 2.0f;
@@ -12,14 +12,14 @@ TArray< FVector2f > UCoreExtMathBlueprintLibrary::GetPointsOnRectangleEdge( cons
 
     for ( int x = -half_width; x <= half_width; x += point_spacing )
     {
-        result.Add( FVector2f( x, half_height ) );
-        result.Add( FVector2f( x, -half_height ) );
+        result.Add( FVector2D( x, half_height ) );
+        result.Add( FVector2D( x, -half_height ) );
     }
 
     for ( int y = -half_height + 1; y <= half_height - 1; y += point_spacing )
     {
-        result.Add( FVector2f( half_width, y ) );
-        result.Add( FVector2f( -half_width, y ) );
+        result.Add( FVector2D( half_width, y ) );
+        result.Add( FVector2D( -half_width, y ) );
     }
 
     return result;
