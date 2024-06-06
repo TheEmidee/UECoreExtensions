@@ -4,9 +4,9 @@ TArray< FVector2f > UCoreExtMathBlueprintLibrary::GetPointsOnRectangleEdge( cons
 {
     TArray< FVector2f > result;
 
-    int half_width = width / 2;
-    int half_height = height / 2;
-    int point_count = ( height + width ) * 2 / point_spacing;
+    float half_width = width / 2.0f;
+    float half_height = height / 2.0f;
+    int point_count = ceil(( height + width ) * 2.0f / point_spacing);
 
     result.Reserve( point_count );
 
