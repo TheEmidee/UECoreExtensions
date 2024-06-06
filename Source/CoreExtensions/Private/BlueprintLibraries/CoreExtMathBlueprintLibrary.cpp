@@ -1,12 +1,12 @@
 #include "BlueprintLibraries/CoreExtMathBlueprintLibrary.h"
 
-TArray< FVector2f > UCoreExtMathBlueprintLibrary::GetPointsOnRectangleEdge( const int height, const int width, const int point_spacing )
+TArray< FVector2f > UCoreExtMathBlueprintLibrary::GetPointsOnRectangleEdge( const float height, const float width, const float point_spacing )
 {
     TArray< FVector2f > result;
 
     float half_width = width / 2.0f;
     float half_height = height / 2.0f;
-    int point_count = ceil(( height + width ) * 2.0f / point_spacing);
+    int point_count = ceil( ( height + width ) * 2.0f / point_spacing );
 
     result.Reserve( point_count );
 
