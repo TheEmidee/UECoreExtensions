@@ -1,5 +1,26 @@
 #include "BlueprintLibraries/CoreExtMathBlueprintLibrary.h"
 
+void UCoreExtMathBlueprintLibrary::GetPointsOnRectangleEdges( TArray< FVector2D > & point_table, const float height, const float width, const float point_spacing )
+{
+    float half_width = width / 2.0f;
+    float half_height = height / 2.0f;
+    int point_count = ceil( ( height + width ) * 2.0f / point_spacing );
+
+    point_table.Reserve( point_count );
+
+    for ( int x = -half_width; x <= half_width; x += point_spacing )
+    {
+        point_table.Emplace( x, half_height );
+        point_table.Emplace( x, -half_height );
+    }
+
+    for ( int y = -half_height + 1; y <= half_height - 1; y += point_spacing )
+    {
+        point_table.Emplace( half_width, y );
+        point_table.Emplace( -half_width, y );
+    }
+}
+
 int UCoreExtMathBlueprintLibrary::GetWrappedIndex( const int index, const int size )
 {
     return ( ( index % size ) + size ) % size;
