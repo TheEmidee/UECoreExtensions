@@ -12,7 +12,7 @@ class COREEXTENSIONS_API UCoreExtMathBlueprintLibrary final : public UBlueprintF
 
 public:
     UFUNCTION( BlueprintPure )
-    static void GetPointsOnRectangleEdges( TArray< FVector2D > & out_point_table, const float height, const float width, const float point_spacing );
+    static void GetPointsOnRectangleEdges( TArray< FVector2D > & point_table, const float height, const float width, const float point_spacing );
 
     UFUNCTION( BlueprintPure )
     static int GetWrappedIndex( const int index, const int size );
