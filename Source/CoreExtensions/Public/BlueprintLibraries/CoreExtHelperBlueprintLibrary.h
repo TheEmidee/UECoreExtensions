@@ -46,6 +46,9 @@ public:
 
     UFUNCTION( BlueprintPure, meta = ( WorldContext = "world_context_object" ) )
     static FString GetGameModeOptions( const UObject * world_context_object );
+
+    UFUNCTION( BlueprintCallable )
+    static bool ModifyAsset( UObject * object );
 };
 
 template < typename _ACTOR_CLASS_ >
