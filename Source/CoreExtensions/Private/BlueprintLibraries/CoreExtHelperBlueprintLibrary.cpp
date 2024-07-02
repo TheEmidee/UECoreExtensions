@@ -122,3 +122,17 @@ FString UCoreExtHelperBlueprintLibrary::GetGameModeOptions( const UObject * worl
 
     return result;
 }
+
+bool UCoreExtHelperBlueprintLibrary::ModifyAsset( UObject * object )
+{
+#if WITH_EDITOR
+    if ( object == nullptr )
+    {
+        return false;
+    }
+
+    return object->Modify( true );
+#else
+    return false;
+#endif
+}
