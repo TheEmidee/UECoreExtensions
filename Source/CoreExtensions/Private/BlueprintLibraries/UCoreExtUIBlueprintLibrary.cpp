@@ -1,8 +1,7 @@
 ﻿#include "BlueprintLibraries/UCoreExtUIBlueprintLibrary.h"
 
-#include "Kismet/GameplayStatics.h"
-
 #include <Components/ListView.h>
+#include <Kismet/GameplayStatics.h>
 
 UUserWidget * UUCoreExtUIBlueprintLibrary::GetWidgetFromListViewItem( UListView * list_view, UObject * item )
 {
