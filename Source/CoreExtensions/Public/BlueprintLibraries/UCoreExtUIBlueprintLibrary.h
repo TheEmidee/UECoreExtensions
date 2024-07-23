@@ -15,4 +15,7 @@ class COREEXTENSIONS_API UUCoreExtUIBlueprintLibrary : public UBlueprintFunction
 public:
     UFUNCTION( BlueprintCallable )
     static UUserWidget * GetWidgetFromListViewItem( UListView * list_view, UObject * item );
+
+    UFUNCTION( BlueprintCallable )
+    static UWidget * GetFocusedWidget( const UObject * world_context_object, const TArray< UWidget * > & widgets );
 };
