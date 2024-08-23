@@ -14,7 +14,7 @@ enum ECoreExtCreateFilePolicy
 };
 
 UCLASS( BlueprintType )
-class COREEXTENSIONS_API UCoreExtFilePrinterObject : public UObject
+class COREEXTENSIONS_API UCoreExtFilePrinterObject final : public UObject
 {
     GENERATED_BODY()
 
@@ -22,19 +22,19 @@ public:
     UCoreExtFilePrinterObject();
 
     UFUNCTION( BlueprintCallable, meta = ( ReturnDisplayName = "Success" ) )
-    static bool CreateFile( UCoreExtFilePrinterObject *& file_printer, FString file_name, const FString sub_directory, ECoreExtCreateFilePolicy creation_policy );
+    static bool CreateFile( UCoreExtFilePrinterObject *& file_printer, const FString & file_name, const FString & sub_directory, ECoreExtCreateFilePolicy creation_policy );
 
     UFUNCTION( BlueprintCallable )
     void CloseFile();
 
     UFUNCTION( BlueprintCallable )
-    void AppendString( FString string_to_append ) const;
+    void AppendString( const FString & string_to_append ) const;
 
     UFUNCTION( BlueprintCallable )
-    void AppendLine( FString string_to_append ) const;
+    void AppendLine( const FString & string_to_append ) const;
 
 private:
-    static FString GetNewFileName( const FString original_name, const FString path );
+    static FString GetNewFileName( const FString & original_name, const FString & path );
 
     bool bFileOpened;
     FString FilePath;

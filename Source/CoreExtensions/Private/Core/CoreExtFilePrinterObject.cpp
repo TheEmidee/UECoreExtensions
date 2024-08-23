@@ -1,7 +1,7 @@
 #include "Core/CoreExtFilePrinterObject.h"
 
-#include "HAL/PlatformFileManager.h"
-#include "Misc/FileHelper.h"
+#include <HAL/PlatformFileManager.h>
+#include <Misc/FileHelper.h>
 
 UCoreExtFilePrinterObject::UCoreExtFilePrinterObject() :
     bFileOpened( false ),
@@ -9,7 +9,7 @@ UCoreExtFilePrinterObject::UCoreExtFilePrinterObject() :
 {
 }
 
-bool UCoreExtFilePrinterObject::CreateFile( UCoreExtFilePrinterObject *& file_printer, const FString file_name, const FString sub_directory, const ECoreExtCreateFilePolicy creation_policy )
+bool UCoreExtFilePrinterObject::CreateFile( UCoreExtFilePrinterObject *& file_printer, const FString & file_name, const FString & sub_directory, const ECoreExtCreateFilePolicy creation_policy )
 {
     file_printer = NewObject< UCoreExtFilePrinterObject >();
     file_printer->bFileOpened = true;
@@ -71,7 +71,7 @@ void UCoreExtFilePrinterObject::CloseFile()
     bFileOpened = false;
 }
 
-void UCoreExtFilePrinterObject::AppendString( const FString string_to_append ) const
+void UCoreExtFilePrinterObject::AppendString( const FString & string_to_append ) const
 {
     if ( !bFileOpened )
     {
@@ -81,7 +81,7 @@ void UCoreExtFilePrinterObject::AppendString( const FString string_to_append ) c
     FFileHelper::SaveStringToFile( string_to_append, *FilePath, FFileHelper::EEncodingOptions::AutoDetect, &IFileManager::Get(), EFileWrite::FILEWRITE_Append );
 }
 
-void UCoreExtFilePrinterObject::AppendLine( const FString string_to_append ) const
+void UCoreExtFilePrinterObject::AppendLine( const FString & string_to_append ) const
 {
     if ( !bFileOpened )
     {
@@ -92,7 +92,7 @@ void UCoreExtFilePrinterObject::AppendLine( const FString string_to_append ) con
     FFileHelper::SaveStringToFile( result, *FilePath, FFileHelper::EEncodingOptions::AutoDetect, &IFileManager::Get(), EFileWrite::FILEWRITE_Append );
 }
 
-FString UCoreExtFilePrinterObject::GetNewFileName( const FString original_name, const FString path )
+FString UCoreExtFilePrinterObject::GetNewFileName( const FString & original_name, const FString & path )
 {
     auto & platform_file = FPlatformFileManager::Get().GetPlatformFile();
 
