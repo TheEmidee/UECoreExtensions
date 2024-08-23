@@ -34,6 +34,8 @@ public:
     void AppendLine( FString string_to_append ) const;
 
 private:
+    static FString GetNewFileName( const FString original_name, const FString path );
+
     bool bFileOpened;
     FString FilePath;
 };

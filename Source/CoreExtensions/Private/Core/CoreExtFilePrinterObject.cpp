@@ -9,7 +9,7 @@ UCoreExtFilePrinterObject::UCoreExtFilePrinterObject() :
 {
 }
 
-bool UCoreExtFilePrinterObject::CreateFile( UCoreExtFilePrinterObject *& file_printer, const FString file_name, const FString sub_directory, ECoreExtCreateFilePolicy creation_policy )
+bool UCoreExtFilePrinterObject::CreateFile( UCoreExtFilePrinterObject *& file_printer, const FString file_name, const FString sub_directory, const ECoreExtCreateFilePolicy creation_policy )
 {
     file_printer = NewObject< UCoreExtFilePrinterObject >();
     file_printer->bFileOpened = true;
@@ -29,7 +29,39 @@ bool UCoreExtFilePrinterObject::CreateFile( UCoreExtFilePrinterObject *& file_pr
         platform_file.CreateDirectory( *path );
     }
 
-    file_printer->FilePath = path + file_name;
+    const auto test_path = path + file_name;
+    const auto file_exists = platform_file.FileExists( *test_path );
+
+    auto name = file_name;
+
+    switch ( creation_policy )
+    {
+        case Append:
+            break;
+        case Clear:
+        {
+            if ( file_exists )
+            {
+                platform_file.DeleteFile( *test_path );
+            }
+        }
+        break;
+        case CreateNew:
+        {
+            if ( file_exists )
+            {
+                name = GetNewFileName( file_name, path );
+            }
+        }
+        break;
+        default:
+        {
+            checkNoEntry();
+        }
+        break;
+    }
+
+    file_printer->FilePath = path + name;
 
     return true;
 }
@@ -58,4 +90,28 @@ void UCoreExtFilePrinterObject::AppendLine( const FString string_to_append ) con
 
     const auto result = "\n" + string_to_append;
     FFileHelper::SaveStringToFile( result, *FilePath, FFileHelper::EEncodingOptions::AutoDetect, &IFileManager::Get(), EFileWrite::FILEWRITE_Append );
+}
+
+FString UCoreExtFilePrinterObject::GetNewFileName( const FString original_name, const FString path )
+{
+    auto & platform_file = FPlatformFileManager::Get().GetPlatformFile();
+
+    auto name = original_name;
+
+    auto postfix_index = 0;
+    while ( platform_file.FileExists( *( path + name ) ) )
+    {
+        ++postfix_index;
+        auto extension_index = 0;
+        if ( original_name.FindLastChar( '.', extension_index ) )
+        {
+            name = original_name;
+            name.InsertAt( extension_index, "_" + FString::FromInt( postfix_index ) );
+            continue;
+        }
+
+        name = original_name + "_" + FString::FromInt( postfix_index );
+    }
+
+    return name;
 }
