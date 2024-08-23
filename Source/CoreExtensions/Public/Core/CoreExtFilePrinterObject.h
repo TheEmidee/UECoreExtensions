@@ -5,6 +5,14 @@
 
 #include "CoreExtFilePrinterObject.generated.h"
 
+UENUM( BlueprintType )
+enum ECoreExtCreateFilePolicy
+{
+    Append,
+    Clear,
+    CreateNew
+};
+
 UCLASS( BlueprintType )
 class COREEXTENSIONS_API UCoreExtFilePrinterObject : public UObject
 {
@@ -13,8 +21,8 @@ class COREEXTENSIONS_API UCoreExtFilePrinterObject : public UObject
 public:
     UCoreExtFilePrinterObject();
 
-    UFUNCTION( BlueprintCallable )
-    bool CreateFile( FString file_name );
+    UFUNCTION( BlueprintCallable, meta = ( ReturnDisplayName = "Success" ) )
+    static bool CreateFile( UCoreExtFilePrinterObject *& file_printer, FString file_name, const FString sub_directory, ECoreExtCreateFilePolicy creation_policy );
 
     UFUNCTION( BlueprintCallable )
     void CloseFile();

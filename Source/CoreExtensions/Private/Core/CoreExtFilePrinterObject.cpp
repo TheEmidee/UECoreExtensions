@@ -9,18 +9,27 @@ UCoreExtFilePrinterObject::UCoreExtFilePrinterObject() :
 {
 }
 
-bool UCoreExtFilePrinterObject::CreateFile( const FString file_name )
+bool UCoreExtFilePrinterObject::CreateFile( UCoreExtFilePrinterObject *& file_printer, const FString file_name, const FString sub_directory, ECoreExtCreateFilePolicy creation_policy )
 {
-    if ( bFileOpened )
+    file_printer = NewObject< UCoreExtFilePrinterObject >();
+    file_printer->bFileOpened = true;
+
+    auto & platform_file = FPlatformFileManager::Get().GetPlatformFile();
+
+    const auto saved_folder = FPaths::ConvertRelativePathToFull( FPaths::ProjectSavedDir() );
+    auto path = saved_folder;
+
+    if ( sub_directory != "" )
     {
-        return false;
+        path += sub_directory + "/";
     }
 
-    bFileOpened = true;
+    if ( !platform_file.DirectoryExists( *path ) )
+    {
+        platform_file.CreateDirectory( *path );
+    }
 
-    FilePath = FPaths::ConvertRelativePathToFull( FPaths::ProjectSavedDir() ) + file_name;
-    /*IPlatformFile & platformFile = FPlatformFileManager::Get().GetPlatformFile();
-    platformFile.CreateDirectory( *FilePath );*/
+    file_printer->FilePath = path + file_name;
 
     return true;
 }
