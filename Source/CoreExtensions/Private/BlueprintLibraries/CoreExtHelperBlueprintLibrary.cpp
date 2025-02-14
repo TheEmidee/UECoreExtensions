@@ -147,6 +147,7 @@ void UCoreExtHelperBlueprintLibrary::SetEditorOnly( AActor * actor, bool editor_
 {
     actor->bIsEditorOnlyActor = editor_only;
 }
+
 void UCoreExtHelperBlueprintLibrary::SetActorComponentOwner( UActorComponent * component, AActor * new_owner_actor )
 {
     if ( component != nullptr && new_owner_actor != nullptr )
@@ -154,4 +155,28 @@ void UCoreExtHelperBlueprintLibrary::SetActorComponentOwner( UActorComponent * c
         const auto new_name = MakeUniqueObjectName( new_owner_actor, component->GetClass(), *component->GetName() );
         component->Rename( *new_name.ToString(), new_owner_actor );
     }
+}
+
+bool UCoreExtHelperBlueprintLibrary::FindTeleportSpot( const UObject * world_context_object, const AActor * Actor, FVector & Location, FRotator & Rotation )
+{
+    if ( auto * world = world_context_object->GetWorld() )
+    {
+        return world->FindTeleportSpot( Actor, Location, Rotation );
+    }
+
+    return false;
+}
+
+bool UCoreExtHelperBlueprintLibrary::TryTeleportToTeleportSpot( const UObject * world_context_object, AActor * Actor, FVector & Location, FRotator & Rotation )
+{
+    if ( auto * world = world_context_object->GetWorld() )
+    {
+        if ( world->FindTeleportSpot( Actor, Location, Rotation ) )
+        {
+            Actor->SetActorLocationAndRotation( Location, Rotation, false, nullptr, ETeleportType::TeleportPhysics );
+            return true;
+        }
+    }
+
+    return false;
 }

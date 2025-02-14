@@ -58,6 +58,12 @@ public:
 
     UFUNCTION( BlueprintCallable, meta = ( ToolTip = "Change primitive component owner without changing attachment tree" ) )
     static void SetActorComponentOwner( UActorComponent * component, AActor * new_owner_actor );
+
+    UFUNCTION( BlueprintCallable, meta = ( WorldContext = "world_context_object" ) )
+    static bool FindTeleportSpot( const UObject * world_context_object, const AActor * Actor, UPARAM( ref ) FVector & Location, UPARAM( ref ) FRotator & Rotation );
+
+    UFUNCTION( BlueprintCallable, meta = ( WorldContext = "world_context_object" ) )
+    static bool TryTeleportToTeleportSpot( const UObject * world_context_object, AActor * Actor, UPARAM( ref ) FVector & Location, UPARAM( ref ) FRotator & Rotation );
 };
 
 template < typename _ACTOR_CLASS_ >
