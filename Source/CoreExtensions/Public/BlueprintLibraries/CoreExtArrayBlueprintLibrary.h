@@ -23,6 +23,16 @@ public:
         }
     }
 
+    template < typename _ARRAY_TYPE_ >
+    static void ShuffleArray( _ARRAY_TYPE_ & array )
+    {
+        for ( int index = array.Num() - 1; index > 0; --index )
+        {
+            auto new_index = FMath::RandRange( 0, index );
+            Swap( array[ index ], array[ new_index ] );
+        }
+    }
+
     template < typename _ENUM_TYPE_ >
     static TArray< _ENUM_TYPE_, TInlineAllocator< static_cast< int32 >( _ENUM_TYPE_::Count ) > > GetInlinedArrayFromEnum()
     {
