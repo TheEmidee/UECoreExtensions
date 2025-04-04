@@ -16,6 +16,8 @@ public:
     UFUNCTION( BlueprintCallable, meta = ( WorldContext = "world_context_object", BlueprintInternalUseOnly = "true" ) )
     static UCoreExtWaitForPrimaryPawn * WaitForPrimaryPawn( UObject * world_context_object );
 
+    FOnPrimaryPawnReadyDelegate & OnPrimaryPawnReady();
+
     void Activate() override;
     void SetReadyToDestroy() override;
 
@@ -35,3 +37,8 @@ private:
     TWeakObjectPtr< UWorld > WorldPtr;
     FDelegateHandle OnPrimaryControllerDelegateHandle;
 };
+
+FORCEINLINE FOnPrimaryPawnReadyDelegate & UCoreExtWaitForPrimaryPawn::OnPrimaryPawnReady()
+{
+    return OnPrimaryPawnDelegate;
+}
