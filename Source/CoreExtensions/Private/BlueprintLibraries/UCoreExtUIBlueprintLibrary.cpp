@@ -35,3 +35,8 @@ UTexture2D * UUCoreExtUIBlueprintLibrary::SelectTextureFromSoftReferences( TSoft
 {
     return ConvertSoftReferenceToTexture( condition ? pick_true_texture : pick_false_texture );
 }
+
+ECheckBoxState UUCoreExtUIBlueprintLibrary::ConvertBooleanToCheckBoxState( bool is_checked )
+{
+    return is_checked ? ECheckBoxState::Checked : ECheckBoxState::Unchecked;
+}

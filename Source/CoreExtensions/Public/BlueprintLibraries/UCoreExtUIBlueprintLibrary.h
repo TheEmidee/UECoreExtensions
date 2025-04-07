@@ -5,6 +5,7 @@
 
 #include "UCoreExtUIBlueprintLibrary.generated.h"
 
+enum class ECheckBoxState : uint8;
 class UListView;
 
 UCLASS()
@@ -24,4 +25,7 @@ public:
 
     UFUNCTION( BlueprintPure )
     static UTexture2D * SelectTextureFromSoftReferences( TSoftObjectPtr< UTexture2D > pick_true_texture, TSoftObjectPtr< UTexture2D > pick_false_texture, bool condition );
+
+    UFUNCTION( BlueprintPure )
+    static ECheckBoxState ConvertBooleanToCheckBoxState( bool is_checked );
 };
