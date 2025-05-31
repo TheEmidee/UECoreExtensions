@@ -32,6 +32,12 @@ public:
     template < typename _ACTOR_CLASS_ >
     static void GetAllActorsOfClass( const UObject * world_context, TArray< _ACTOR_CLASS_ * > & out_actors );
 
+    UFUNCTION( BlueprintCallable, Category = "Component", meta = ( WorldContext = "world_context", DeterminesOutputType = "component_class" ) )
+    static UActorComponent * GetWorldComponentByClass( const UObject * world_context, TSubclassOf< UActorComponent > component_class );
+
+    UFUNCTION( BlueprintCallable, Category = "Component", meta = ( WorldContext = "world_context", DeterminesOutputType = "component_class", DynamicOutputParam = "out_components" ) )
+    static void GetWorldComponentsByClass( const UObject * world_context, TSubclassOf< UActorComponent > component_class, TArray< UActorComponent * > & out_components );
+
     UFUNCTION( BlueprintPure, Category = "Utilities", meta = ( DeterminesOutputType = "object_class" ) )
     static UObject * GetClassDefaultObject( const UClass * object_class );
 
