@@ -51,6 +51,25 @@ bool UCoreExtHelperBlueprintLibrary::BrowseMap( FWorldContext & world_context, c
     return true;
 }
 
+UActorComponent * UCoreExtHelperBlueprintLibrary::GetWorldComponentByClass( const UObject * world_context, TSubclassOf< UActorComponent > component_class )
+{
+    if ( auto * world = GEngine->GetWorldFromContextObject( world_context, EGetWorldErrorMode::LogAndReturnNull ) )
+    {
+        return world->GetWorldSettings()->GetComponentByClass( component_class );
+    }
+
+    return nullptr;
+}
+
+void UCoreExtHelperBlueprintLibrary::GetWorldComponentsByClass( const UObject * world_context, TSubclassOf< UActorComponent > component_class, TArray< UActorComponent * > & out_components )
+{
+    out_components.Reset();
+    if ( auto * world = GEngine->GetWorldFromContextObject( world_context, EGetWorldErrorMode::LogAndReturnNull ) )
+    {
+        world->GetWorldSettings()->GetComponents( component_class, out_components );
+    }
+}
+
 UObject * UCoreExtHelperBlueprintLibrary::GetClassDefaultObject( const UClass * object_class )
 {
     return object_class->GetDefaultObject();
