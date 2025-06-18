@@ -79,7 +79,7 @@ void UCoreExtWaitForPrimaryPawn::Step3_ListenToPrimaryPawnChanged( APawn * old_p
     Step4_BroadCastPrimaryPawn( new_pawn );
 }
 
-void UCoreExtWaitForPrimaryPawn::Step4_BroadCastPrimaryPawn( const APawn * player_pawn )
+void UCoreExtWaitForPrimaryPawn::Step4_BroadCastPrimaryPawn( APawn * player_pawn )
 {
     OnPrimaryPawnDelegate.Broadcast( player_pawn );
     SetReadyToDestroy();

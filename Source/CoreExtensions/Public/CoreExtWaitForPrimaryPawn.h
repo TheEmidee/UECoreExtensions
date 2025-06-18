@@ -5,7 +5,7 @@
 
 #include "CoreExtWaitForPrimaryPawn.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam( FOnPrimaryPawnReadyDelegate, const APawn *, primary_pawn );
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam( FOnPrimaryPawnReadyDelegate, APawn *, primary_pawn );
 
 UCLASS()
 class COREEXTENSIONS_API UCoreExtWaitForPrimaryPawn final : public UBlueprintAsyncActionBase
@@ -31,7 +31,7 @@ private:
 
     UFUNCTION()
     void Step3_ListenToPrimaryPawnChanged( APawn * old_pawn, APawn * new_pawn );
-    void Step4_BroadCastPrimaryPawn( const APawn * player_pawn );
+    void Step4_BroadCastPrimaryPawn(APawn* player_pawn);
 
     TObjectPtr< APlayerController > PlayerController;
     TWeakObjectPtr< UWorld > WorldPtr;
