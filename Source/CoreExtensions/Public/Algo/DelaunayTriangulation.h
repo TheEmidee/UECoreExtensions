@@ -3,7 +3,7 @@
 #include "Math/Edge2D.h"
 #include "Math/Triangle2D.h"
 
-#include <CoreMinimal.h>
+#include "CoreMinimal.h"
 
 class COREEXTENSIONS_API FDelaunayTriangulation
 {

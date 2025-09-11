@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Containers/Deque.h>
-#include <CoreMinimal.h>
+#include "Containers/Deque.h"
+#include "CoreMinimal.h"
 
 class COREEXTENSIONS_API FFrequencyThrottler
 {

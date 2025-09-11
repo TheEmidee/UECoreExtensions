@@ -1,7 +1,7 @@
 #include "Commandlets/CheckNoRedirectorsCommandlet.h"
 
-#include <AssetRegistry/AssetRegistryModule.h>
-#include <AssetRegistry/IAssetRegistry.h>
+#include "AssetRegistry/AssetRegistryModule.h"
+#include "AssetRegistry/IAssetRegistry.h"
 
 DEFINE_LOG_CATEGORY_STATIC( LogCheckNoRedirectors, Log, All )
 

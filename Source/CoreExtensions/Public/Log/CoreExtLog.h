@@ -1,9 +1,9 @@
 #pragma once
 
-#include <Engine/Engine.h>
-#include <Logging/LogMacros.h>
-#include <Math/Color.h>
-#include <Templates/IsArrayOrRefOfType.h>
+#include "Engine/Engine.h"
+#include "Logging/LogMacros.h"
+#include "Math/Color.h"
+#include "Templates/IsArrayOrRefOfType.h"
 
 #define DECLARE_SCOPED_LOG( CategoryName, InstanceName, InitialLogFormat, ... ) \
     struct FSQScopedLog                                                         \

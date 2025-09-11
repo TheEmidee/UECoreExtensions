@@ -2,7 +2,7 @@
 
 #include "Math/Edge2D.h"
 
-#include <CoreMinimal.h>
+#include "CoreMinimal.h"
 
 struct COREEXTENSIONS_API FCoreExtMath
 {

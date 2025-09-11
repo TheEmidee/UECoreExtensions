@@ -1,9 +1,9 @@
 #include "CoreExtWaitForPrimaryPawn.h"
 
-#include <Engine/GameInstance.h>
-#include <Engine/Engine.h>
-#include <Engine/World.h>
-#include <GameFramework/GameModeBase.h>
+#include "Engine/GameInstance.h"
+#include "Engine/Engine.h"
+#include "Engine/World.h"
+#include "GameFramework/GameModeBase.h"
 
 UCoreExtWaitForPrimaryPawn * UCoreExtWaitForPrimaryPawn::WaitForPrimaryPawn( UObject * world_context_object )
 {
