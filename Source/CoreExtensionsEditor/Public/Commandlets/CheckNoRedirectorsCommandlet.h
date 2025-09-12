@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Commandlets/Commandlet.h>
-#include <CoreMinimal.h>
+#include "Commandlets/Commandlet.h"
+#include "CoreMinimal.h"
 
 #include "CheckNoRedirectorsCommandlet.generated.h"
 

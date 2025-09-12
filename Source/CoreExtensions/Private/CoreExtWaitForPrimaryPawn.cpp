@@ -1,7 +1,9 @@
 #include "CoreExtWaitForPrimaryPawn.h"
 
-#include <Engine/GameInstance.h>
-#include <GameFramework/GameModeBase.h>
+#include "Engine/GameInstance.h"
+#include "Engine/Engine.h"
+#include "Engine/World.h"
+#include "GameFramework/GameModeBase.h"
 
 UCoreExtWaitForPrimaryPawn * UCoreExtWaitForPrimaryPawn::WaitForPrimaryPawn( UObject * world_context_object )
 {
@@ -63,7 +65,7 @@ void UCoreExtWaitForPrimaryPawn::Step1_ListenToPrimaryControllerExist( AGameMode
 
 void UCoreExtWaitForPrimaryPawn::Step2_TryToGetPawn( APlayerController * player_controller )
 {
-    if ( auto * pawn = player_controller->GetPawn() )
+    if ( auto pawn = player_controller->GetPawn() )
     {
         Step4_BroadCastPrimaryPawn( pawn );
     }

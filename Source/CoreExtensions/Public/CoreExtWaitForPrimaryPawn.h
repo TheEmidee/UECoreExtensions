@@ -1,7 +1,7 @@
 #pragma once
 
-#include <CoreMinimal.h>
-#include <Kismet/BlueprintAsyncActionBase.h>
+#include "CoreMinimal.h"
+#include "Kismet/BlueprintAsyncActionBase.h"
 
 #include "CoreExtWaitForPrimaryPawn.generated.h"
 

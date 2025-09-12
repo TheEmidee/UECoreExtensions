@@ -1,7 +1,7 @@
 #pragma once
 
-#include <CoreMinimal.h>
-#include <UObject/Object.h>
+#include "CoreMinimal.h"
+#include "UObject/Object.h"
 
 #include "CoreExtFilePrinterObject.generated.h"
 

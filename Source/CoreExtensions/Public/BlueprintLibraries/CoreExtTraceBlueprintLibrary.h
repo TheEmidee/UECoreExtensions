@@ -1,8 +1,8 @@
 #pragma once
 
-#include <CoreMinimal.h>
-#include <Kismet/BlueprintFunctionLibrary.h>
-#include <Kismet/KismetSystemLibrary.h>
+#include "CoreMinimal.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 #include "CoreExtTraceBlueprintLibrary.generated.h"
 
